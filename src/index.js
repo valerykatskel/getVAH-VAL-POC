@@ -1,9 +1,6 @@
 // Develop the function to find out Volume Area High, Volume Area Low and all POC's for Volume Profile.
 // The example of volume profile is the array of arrays such as [price, BID volume, ASK volume]
 
-// case #1: there is only one POC level
-// case #2: there are many POC levels
-
 // http://joxi.ru/zANvzYMC6yk9PA bid-ask
 // http://joxi.ru/1A5VKxLTGJXdYr delta
 // http://joxi.ru/eAOvzYECpD53B2 volume
@@ -30,7 +27,7 @@ const volumeProfile = [
   [1556.3, 34, 20],
   [1556.2, 41, 35],
   [1556.1, 53, 12],
-  [1556.0, 8, 0],
+  [1556.0, 8, 0]
 ];
 
 function solution(vp, volumeAreaPercent) {
