@@ -134,7 +134,6 @@ Return
 {
   vah: {price: 26.36, value: 90},
   val: {price: 26.32, value: 116},
-  deltа: {price: 26.30, value: -32},
   poc: {price: 26.34, value: 167},
-  total: {bid: 437, ask: 353, delta: -84},
+  delta: {price: 26.3, value: -32},
 }
