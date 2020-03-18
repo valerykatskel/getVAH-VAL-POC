@@ -6,28 +6,21 @@
 // http://joxi.ru/eAOvzYECpD53B2 volume
 const percent = 70;
 const volumeProfile = [
-  [1558.1, 9, 10],
-  [1558.0, 0, 36],
-  [1557.9, 2, 17],
-  [1557.8, 23, 28],
-  [1557.7, 42, 73],
-  [1557.6, 41, 31],
-  [1557.5, 8, 94],
-  [1557.4, 35, 27],
-  [1557.3, 2, 13],
-  [1557.2, 8, 40],
-  [1557.1, 31, 28],
-  [1557.0, 9, 57],
-  [1556.9, 36, 61],
-  [1556.8, 127, 127],
-  [1556.7, 131, 107],
-  [1556.6, 113, 109],
-  [1556.5, 124, 107],
-  [1556.4, 50, 55],
-  [1556.3, 34, 20],
-  [1556.2, 41, 35],
-  [1556.1, 53, 12],
-  [1556.0, 8, 0]
+  [26.66, 0, 1],
+  [26.65, 0, 29],
+  [26.64, 15, 34],
+  [26.63, 14, 46],
+  [26.62, 32, 27],
+  [26.61, 7, 6],
+  [26.60, 4, 13],
+  [26.59, 25, 16],
+  [26.58, 27, 73],
+  [26.57, 106, 132],
+  [26.56, 105, 98],
+  [26.55, 115, 98],
+  [26.54, 98, 81],
+  [26.53, 83, 30],
+  [26.52, 25, 0],
 ];
 
 function solution(vp, volumeAreaPercent) {
@@ -38,7 +31,7 @@ function solution(vp, volumeAreaPercent) {
     .sort((a, b) => b[3] - a[3])
     .filter((a, i, ar) => a[3] === ar[0][3])
     .sort((a, b) => a[4] - b[4]);
-
+  console.log(POC)
   const DELTA = vp
     .map((level, id) => [...level, level[2] - level[1], id])
     .sort((a, b) => Math.abs(b[3]) - Math.abs(a[3]));
@@ -46,7 +39,7 @@ function solution(vp, volumeAreaPercent) {
   const barVolume = vp.reduce((s, c) => (s += c[1] + c[2]), 0);
 
   const volumeArea = Math.round(volumeAreaPercent * (barVolume / 100));
-  console.log(DELTA[0]);
+  //console.log(DELTA[0]);
   let calcVolumeArea = 0,
     vahIndex = 0,
     valIndex = 0;
@@ -66,10 +59,12 @@ function solution(vp, volumeAreaPercent) {
   const compareVolumes = (vah, val) => {
     if (vah > val) {
       calcVolumeArea += vah;
-      if (calcVolumeArea < volumeArea) vahIndex--;
+      //if (calcVolumeArea < volumeArea) vahIndex--;
+      vahIndex--;
     } else if (vah < val) {
       calcVolumeArea += val;
-      if (calcVolumeArea < volumeArea) valIndex++;
+      //if (calcVolumeArea < volumeArea) valIndex++;
+      valIndex++;
     } else {
       calcVolumeArea += vah;
       if (calcVolumeArea < volumeArea) vahIndex--;
@@ -98,11 +93,13 @@ function solution(vp, volumeAreaPercent) {
     }
   });
 
+  const pocPrice = POC.length === 1 ? POC[0][0] : POC.map(el => el[0]);
+  const pocValue = POC.length === 1 ? POC[0][3] : POC.map(el => el[3]);
   return {
-    VAH: vp[vahIndex][0],
-    VAL: vp[valIndex][0],
-    POC: POC.length === 1 ? POC[0][0] : POC.map(el => el[0]),
-    DELTA: DELTA[0][3]
+    vah: {price: vp[vahIndex][0], value: vp[vahIndex][2] + vp[vahIndex][1]},
+    val: {price: vp[valIndex][0], value: vp[valIndex][2] + vp[valIndex][1]},
+    poc: {price: pocPrice, value: pocValue},
+    delta: {price: DELTA[0][0], value: DELTA[0][3]}
   };
 }
 
